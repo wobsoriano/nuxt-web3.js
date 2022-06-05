@@ -31,8 +31,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "bumpp --commit --push --tag && yarn publish",
-    "prepare": "nuxi prepare playground",
-    "postinstall": "patch-package"
+    "prepare": "nuxi prepare playground"
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
@@ -48,8 +47,6 @@
     "bumpp": "^7.1.1",
     "eslint": "^8.14.0",
     "nuxt": "^3.0.0-rc.3",
-    "patch-package": "^6.4.7",
-    "postinstall-postinstall": "^2.1.0",
     "util2": "npm:util@0.12.4"
   },
   "eslintConfig": {
