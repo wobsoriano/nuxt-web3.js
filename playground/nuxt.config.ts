@@ -7,4 +7,11 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
+  runtimeConfig: {
+    public: {
+      provider: {
+        host: `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`,
+      },
+    },
+  },
 })

@@ -2,7 +2,7 @@ import { fileURLToPath } from 'url'
 import { resolve } from 'pathe'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import { addPlugin, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
+import { addAutoImport, addPlugin, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -39,6 +39,10 @@ export default defineNuxtModule({
         }),
         NodeModulesPolyfillPlugin(),
       )
+    })
+
+    addAutoImport({
+      name: 'useWeb3', from: resolve(runtimeDir, 'composables'),
     })
   },
 })
