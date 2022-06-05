@@ -1,6 +1,7 @@
-import { resolve } from 'path'
-import { fileURLToPath } from 'url'
-import { addPluginTemplate, addServerHandler, addTemplate, addVitePlugin, defineNuxtModule } from '@nuxt/kit'
+import { resolve } from 'pathe'
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { defineNuxtModule, extendViteConfig } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -8,28 +9,31 @@ export default defineNuxtModule({
     configKey: 'web3',
   },
   setup(_options, nuxt) {
-  //  const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
-  //   nuxt.options.build.transpile.push(runtimeDir, '/_nuxt/node_modules/node-stdlib-browser/helpers/esbuild/shim.js')
+    nuxt.hook('vite:extendConfig', (clientConfig, { isClient }) => {
+      // Use dist in prod - higher size
+      if (isClient && process.env.NODE_ENV === 'production') {
+        clientConfig.resolve.alias = {
+          ...clientConfig.resolve.alias,
+          web3: resolve(__dirname, './node_modules/web3/dist/web3.min.js'),
+        }
+      }
+    })
 
-    //   addServerHandler({
-    //     route: '/_polyfill/web3',
-    //     handler: resolve(runtimeDir, 'server')
-    //   })
+    extendViteConfig((config) => {
+      config.optimizeDeps = config.optimizeDeps || {}
+      config.optimizeDeps.esbuildOptions = config.optimizeDeps.esbuildOptions || {}
+      config.optimizeDeps.esbuildOptions.define = config.optimizeDeps.esbuildOptions.define || {}
+      config.optimizeDeps.esbuildOptions.define.global = 'globalThis'
 
-    // nuxt.options.app.head.script.push({
-    //   type: 'module',
-    //   id: 'web3_polyfill',
-    //   children: `
-    //     import process from 'process';
-    //     import { Buffer } from 'buffer';
-    //     import EventEmitter from 'events';
-    //     import util from 'util';
-    //     console.log(util.callbackify);
-    //     window.util = util;
-    //     window.Buffer = Buffer;
-    //     window.process = process;
-    //     window.EventEmitter = EventEmitter;
-    //   `
-    // })
+      // Add global/module polyfills
+      config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps.esbuildOptions.plugins || []
+      config.optimizeDeps.esbuildOptions.plugins.push(
+        NodeGlobalsPolyfillPlugin({
+          process: true,
+          buffer: true,
+        }),
+        NodeModulesPolyfillPlugin(),
+      )
+    })
   },
 })
