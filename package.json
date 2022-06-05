@@ -1,0 +1,49 @@
+{
+  "name": "nuxt-web3.js",
+  "type": "module",
+  "version": "0.1.23",
+  "license": "MIT",
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "nuxt-module-build",
+    "play": "yarn build && nuxi dev playground",
+    "build:playground": "nuxi build playground",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "release": "bumpp --commit --push --tag && yarn publish",
+    "prepare": "nuxi prepare playground",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.0.0-rc.3",
+    "defu": "^6.0.0",
+    "pathe": "^0.3.0",
+    "web3": "^1.7.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.23.1",
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "@nuxt/module-builder": "latest",
+    "bumpp": "^7.1.1",
+    "eslint": "^8.14.0",
+    "nuxt": "^3.0.0-rc.3",
+    "patch-package": "^6.4.7",
+    "util2": "npm:util@0.12.4"
+  },
+  "eslintConfig": {
+    "extends": "@antfu"
+  }
+}

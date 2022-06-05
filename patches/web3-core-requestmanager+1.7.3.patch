@@ -1,0 +1,13 @@
+diff --git a/node_modules/web3-core-requestmanager/lib/index.js b/node_modules/web3-core-requestmanager/lib/index.js
+index a022678..7f0d380 100644
+--- a/node_modules/web3-core-requestmanager/lib/index.js
++++ b/node_modules/web3-core-requestmanager/lib/index.js
+@@ -17,7 +17,7 @@
+  * @date 2017
+  */
+ "use strict";
+-const { callbackify } = require('util');
++const { callbackify } = require('util2');
+ var errors = require('web3-core-helpers').errors;
+ var Jsonrpc = require('./jsonrpc.js');
+ var BatchManager = require('./batch.js');
