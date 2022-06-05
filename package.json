@@ -37,7 +37,6 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@nuxt/kit": "^3.0.0-rc.3",
-    "defu": "^6.0.0",
     "pathe": "^0.3.0",
     "web3": "^1.7.3"
   },
@@ -46,8 +45,7 @@
     "@nuxt/module-builder": "latest",
     "bumpp": "^7.1.1",
     "eslint": "^8.14.0",
-    "nuxt": "^3.0.0-rc.3",
-    "util2": "npm:util@0.12.4"
+    "nuxt": "^3.0.0-rc.3"
   },
   "eslintConfig": {
     "extends": "@antfu"
