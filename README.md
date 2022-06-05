@@ -18,19 +18,6 @@ export default defineNuxtConfig({
 })
 ```
 
-Custom provider
-
-```html
-<script setup lang="ts">
-const $Web3 = useWeb3()
-
-const provider = new $Web3.providers.HttpProvider('PROVIDER_HOST')
-const web3 = new $Web3(provider)
-</script>
-```
-
-Browser or window Ethereum provider
-
 ```html
 <script setup lang="ts">
 const $Web3 = useWeb3()
