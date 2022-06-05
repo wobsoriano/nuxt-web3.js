@@ -2,6 +2,13 @@
   "name": "nuxt-web3.js",
   "type": "module",
   "version": "0.1.23",
+  "keywords": [
+    "web3",
+    "nuxt",
+    "module",
+    "crypto",
+    "dapp"
+  ],
   "license": "MIT",
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
