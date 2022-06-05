@@ -28,6 +28,8 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@nuxt/kit": "^3.0.0-rc.3",
     "defu": "^6.0.0",
     "pathe": "^0.3.0",
@@ -35,8 +37,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.23.1",
-    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
-    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@nuxt/module-builder": "latest",
     "bumpp": "^7.1.1",
     "eslint": "^8.14.0",

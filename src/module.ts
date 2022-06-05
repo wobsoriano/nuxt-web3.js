@@ -1,7 +1,8 @@
+import { fileURLToPath } from 'url'
 import { resolve } from 'pathe'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import { defineNuxtModule, extendViteConfig } from '@nuxt/kit'
+import { addPlugin, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -9,12 +10,16 @@ export default defineNuxtModule({
     configKey: 'web3',
   },
   setup(_options, nuxt) {
+    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+    nuxt.options.build.transpile.push(runtimeDir)
+    addPlugin(resolve(runtimeDir, 'plugin'))
+
     nuxt.hook('vite:extendConfig', (clientConfig, { isClient }) => {
       // Use dist in prod - higher size
       if (isClient && process.env.NODE_ENV === 'production') {
         clientConfig.resolve.alias = {
           ...clientConfig.resolve.alias,
-          web3: resolve(__dirname, './node_modules/web3/dist/web3.min.js'),
+          web3: resolve('./node_modules/web3/dist/web3.min.js'),
         }
       }
     })
