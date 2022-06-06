@@ -25,7 +25,7 @@ const Web3 = useWeb3()
 const provider = new Web3.providers.HttpProvider('PROVIDER_HOST')
 const web3 = new Web3(provider)
 
-// or any wallet that inject an Ethereum Provider into the browser or window
+// or any wallet that injects an Ethereum Provider into the browser or window
 if (process.client) {
   const web3 = new Web3(window.ethereum)
 }
