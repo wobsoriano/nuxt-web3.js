@@ -31,7 +31,7 @@
     "playground:preview": "node playground/.output/server/index.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "release": "bumpp --commit --push --tag && npm publish",
+    "release": "bumpp --commit --push --tag && yarn publish",
     "prepare": "nuxi prepare playground"
   },
   "dependencies": {
