@@ -42,6 +42,8 @@ const balance = await web3.eth.getBalance(walletAddress)
 </script>
 ```
 
+For Nuxt 2 version, use https://github.com/fzn0x/nuxt-web3.
+
 ## License
 
 MIT
