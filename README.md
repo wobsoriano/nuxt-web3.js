@@ -24,11 +24,21 @@ const Web3 = useWeb3()
 
 const provider = new Web3.providers.HttpProvider('PROVIDER_HOST')
 const web3 = new Web3(provider)
+</script>
+```
 
-// or any wallet that injects an Ethereum Provider into the browser or window
-if (process.client) {
-  const web3 = new Web3(window.ethereum)
-}
+TIP: When using browser/window based providers, you can use `globalThis` and provide a default provider to fix `window is not defined` errors.
+
+```html
+<script setup lang="ts">
+const $Web3 = useWeb3()
+
+// Default provider for server
+const provider = new $Web3.providers.HttpProvider('PROVIDER_HOST')
+// Use window.ethereum or default provider
+const web3 = new $Web3((globalThis.window as any)?.ethereum ?? provider)
+
+const balance = await web3.eth.getBalance(walletAddress)
 </script>
 ```
 

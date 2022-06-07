@@ -15,7 +15,7 @@ export default defineNuxtModule({
     addPlugin(resolve(runtimeDir, 'plugin'))
 
     nuxt.hook('vite:extendConfig', (clientConfig, { isClient }) => {
-      // Use dist in prod - higher size
+      // TODO: Do not use dist in prod - big bundle size
       if (isClient && process.env.NODE_ENV === 'production') {
         clientConfig.resolve.alias = {
           ...clientConfig.resolve.alias,
@@ -27,18 +27,22 @@ export default defineNuxtModule({
     extendViteConfig((config) => {
       config.optimizeDeps = config.optimizeDeps || {}
       config.optimizeDeps.esbuildOptions = config.optimizeDeps.esbuildOptions || {}
-      config.optimizeDeps.esbuildOptions.define = config.optimizeDeps.esbuildOptions.define || {}
-      config.optimizeDeps.esbuildOptions.define.global = 'globalThis'
 
-      // Add global/module polyfills
-      config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps.esbuildOptions.plugins || []
-      config.optimizeDeps.esbuildOptions.plugins.push(
+      // Node.js global to browser globalThis
+      config.optimizeDeps.esbuildOptions.define = {
+        ...config.optimizeDeps.esbuildOptions.define,
+        global: 'globalThis',
+      }
+
+      // Enable esbuild polyfill plugins
+      config.optimizeDeps.esbuildOptions.plugins = [
+        ...config.optimizeDeps.esbuildOptions.plugins || [],
         NodeGlobalsPolyfillPlugin({
           process: true,
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
-      )
+      ]
     })
 
     addAutoImport({
