@@ -2,7 +2,7 @@
 const $Web3 = useWeb3()
 const runtimeConfig = useRuntimeConfig()
 
-const walletAddress = '0x57a44b7942bc7B512BE4A1E7dA3d4F0705212453'
+const walletAddress = '0x0320DE3378dCDE180758ad2D41C0e1C6dCbB441D'
 
 const provider = new $Web3.providers.HttpProvider(runtimeConfig.public.provider.host)
 const web3 = new $Web3($Web3.givenProvider ?? provider)

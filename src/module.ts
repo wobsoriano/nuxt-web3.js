@@ -19,12 +19,11 @@ export default defineNuxtModule({
 
     nuxt.hook('vite:extendConfig', (clientConfig, { isClient }) => {
       // TODO: Do not use dist in prod - big bundle size
-      if (isClient && process.env.NODE_ENV === 'production') {
-        clientConfig.resolve.alias = {
-          ...clientConfig.resolve.alias,
-          web3: resolve('./node_modules/web3/dist/web3.min.js'),
-        }
-      }
+      if (isClient && process.env.NODE_ENV === 'production')
+        clientConfig.resolve.alias.web3 = resolve('./node_modules/web3/dist/web3.min.js')
+
+      // Fix callbackify errors on development
+      clientConfig.resolve.alias.util = 'util2'
     })
 
     extendViteConfig((config) => {

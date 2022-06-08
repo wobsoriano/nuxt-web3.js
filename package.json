@@ -39,6 +39,7 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@nuxt/kit": "^3.0.0-rc.3",
     "pathe": "^0.3.0",
+    "util2": "npm:util@0.12.4",
     "web3": "^1.7.3"
   },
   "devDependencies": {
