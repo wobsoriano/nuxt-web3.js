@@ -34,10 +34,10 @@ const balance = await web3.eth.getBalance(walletAddress)
 ## Composables
 
 - `useWeb3()` - Returns the main class of Web3.
-- `useWeb3Utils` - Returns the Web3 utility functions.
-- `useWeb3Providers` - Returns the current available providers.
-- `useWeb3Modules` - Returns an object with the classes of all major sub modules.
-- `useWeb3GivenProvider` - Returns the given provider by the (browser) environment.
+- `useWeb3Utils()` - Returns the Web3 utility functions.
+- `useWeb3Providers()` - Returns the current available providers.
+- `useWeb3Modules()` - Returns an object with the classes of all major sub modules.
+- `useWeb3GivenProvider()` - Returns the given provider by the (browser) environment.
 
 For Nuxt 2 version, use https://github.com/fzn0x/nuxt-web3.
 
