@@ -2,7 +2,9 @@ import { fileURLToPath } from 'url'
 import { resolve } from 'pathe'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import { addAutoImport, addPlugin, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
+import { addAutoImport, addPlugin, defineNuxtModule, extendViteConfig, useLogger } from '@nuxt/kit'
+
+const logger = useLogger('nuxt-web3.js')
 
 export default defineNuxtModule({
   meta: {
@@ -48,5 +50,7 @@ export default defineNuxtModule({
     addAutoImport({
       name: 'useWeb3', from: resolve(runtimeDir, 'composables'),
     })
+
+    logger.success('Web3 module successfully installed. Visit https://web3js.readthedocs.io/en/v1.7.3 for more info.')
   },
 })
