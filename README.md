@@ -25,7 +25,7 @@ const Web3 = useWeb3()
 // Default provider for server
 const provider = new Web3.providers.HttpProvider('PROVIDER_HOST')
 // Use window.ethereum or default provider
-const web3 = new Web3($Web3.givenProvider || provider)
+const web3 = new Web3(Web3.givenProvider || provider)
 
 const balance = await web3.eth.getBalance(walletAddress)
 </script>
