@@ -3,6 +3,7 @@ import { resolve } from 'pathe'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { addAutoImport, addPlugin, defineNuxtModule, extendViteConfig, useLogger } from '@nuxt/kit'
+import Web3 from 'web3'
 
 const logger = useLogger('nuxt-web3.js')
 
@@ -55,6 +56,6 @@ export default defineNuxtModule({
       { name: 'useWeb3GivenProvider', from: resolve(runtimeDir, 'composables') },
     ])
 
-    logger.success('Web3 module successfully installed. Visit https://web3js.readthedocs.io/en/v1.7.3 for more info.')
+    logger.success(`Web3 module successfully installed. Visit https://web3js.readthedocs.io/en/v${Web3.version} for more info.`)
   },
 })
