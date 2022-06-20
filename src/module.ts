@@ -49,10 +49,6 @@ export default defineNuxtModule({
 
     addAutoImport([
       { name: 'useWeb3', from: resolve(runtimeDir, 'composables') },
-      { name: 'useWeb3Utils', from: resolve(runtimeDir, 'composables') },
-      { name: 'useWeb3Providers', from: resolve(runtimeDir, 'composables') },
-      { name: 'useWeb3Modules', from: resolve(runtimeDir, 'composables') },
-      { name: 'useWeb3GivenProvider', from: resolve(runtimeDir, 'composables') },
     ])
 
     logger.success(`Web3 module successfully installed. Visit https://web3js.readthedocs.io/en/v${Web3.version} for more info.`)
