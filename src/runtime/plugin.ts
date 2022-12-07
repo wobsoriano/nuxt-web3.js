@@ -1,4 +1,3 @@
-// @ts-expect-error: Resolved by Nuxt
 import { defineNuxtPlugin } from '#app'
 
 export default defineNuxtPlugin(async () => {
