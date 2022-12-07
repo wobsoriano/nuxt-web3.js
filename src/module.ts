@@ -2,7 +2,7 @@ import { fileURLToPath } from 'url'
 import { resolve } from 'pathe'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import { addAutoImport, addPlugin, defineNuxtModule, extendViteConfig, useLogger } from '@nuxt/kit'
+import { addImports, addPlugin, defineNuxtModule, extendViteConfig, useLogger } from '@nuxt/kit'
 import Web3 from 'web3'
 
 const logger = useLogger('nuxt-web3.js')
@@ -17,37 +17,30 @@ export default defineNuxtModule({
     nuxt.options.build.transpile.push(runtimeDir)
     addPlugin(resolve(runtimeDir, 'plugin'))
 
-    nuxt.hook('vite:extendConfig', (clientConfig, { isClient }) => {
-      // TODO: Do not use dist in prod - big bundle size
-      if (isClient && process.env.NODE_ENV === 'production')
-        clientConfig.resolve.alias.web3 = resolve('./node_modules/web3/dist/web3.min.js')
-
-      // Fix callbackify errors on development
-      clientConfig.resolve.alias.util = 'util2'
+    nuxt.hook('vite:extendConfig', (config) => {
+      config.define = config.define || {}
+      config.define['process.env.NODE_DEBUG'] = JSON.stringify(process.env.NODE_DEBUG)
     })
 
     extendViteConfig((config) => {
       config.optimizeDeps = config.optimizeDeps || {}
       config.optimizeDeps.esbuildOptions = config.optimizeDeps.esbuildOptions || {}
+      config.optimizeDeps.esbuildOptions.define = config.optimizeDeps.esbuildOptions.define || {}
 
       // Node.js global to browser globalThis
-      config.optimizeDeps.esbuildOptions.define = {
-        ...config.optimizeDeps.esbuildOptions.define,
-        global: 'globalThis',
-      }
+      config.optimizeDeps.esbuildOptions.define.global = 'globalThis'
 
       // Enable esbuild polyfill plugins
-      config.optimizeDeps.esbuildOptions.plugins = [
-        ...config.optimizeDeps.esbuildOptions.plugins || [],
+      config.optimizeDeps.esbuildOptions.plugins?.push(
         NodeGlobalsPolyfillPlugin({
           process: true,
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
-      ]
+      )
     })
 
-    addAutoImport([
+    addImports([
       { name: 'useWeb3', from: resolve(runtimeDir, 'composables') },
     ])
 

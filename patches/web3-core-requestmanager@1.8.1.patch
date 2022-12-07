@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index cffcad854ed05ed13cc4786bb13d2c8830271f77..f06030b9023d79a0003f2dbf28076fd3edbf2cec 100644
+--- a/package.json
++++ b/package.json
+@@ -12,7 +12,7 @@
+         "compile": "tsc -b tsconfig.json"
+     },
+     "dependencies": {
+-        "util": "^0.12.0",
++        "util": "^0.12.5",
+         "web3-core-helpers": "1.8.1",
+         "web3-providers-http": "1.8.1",
+         "web3-providers-ipc": "1.8.1",

@@ -2,6 +2,7 @@
   "name": "nuxt-web3.js",
   "type": "module",
   "version": "0.1.4",
+  "packageManager": "pnpm@7.5.0",
   "keywords": [
     "web3",
     "nuxt",
@@ -23,32 +24,40 @@
     "dist"
   ],
   "scripts": {
-    "prepublishOnly": "yarn build",
+    "update-deps": "taze -w && pnpm i",
+    "prepublishOnly": "pnpm build",
     "build": "nuxt-module-build",
-    "play": "yarn build && nuxi dev playground",
-    "playground:build": "nuxi build playground",
-    "playground:preview": "node playground/.output/server/index.mjs",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "release": "bumpp --commit --push --tag && yarn publish",
+    "release": "bumpp --commit --push --tag && npm publish",
     "prepare": "nuxi prepare playground"
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
-    "@nuxt/kit": "^3.0.0-rc.4",
-    "pathe": "^0.3.0",
-    "util2": "npm:util@0.12.4",
-    "web3": "^1.7.3"
+    "@nuxt/kit": "^3.0.0",
+    "pathe": "^1.0.0",
+    "web3": "^1.8.1",
+    "web3-core-requestmanager": "^1.8.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.23.1",
-    "@nuxt/module-builder": "latest",
+    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/schema": "^3.0.0",
     "bumpp": "^7.1.1",
     "eslint": "^8.14.0",
-    "nuxt": "^3.0.0-rc.4"
+    "nuxt": "^3.0.0",
+    "taze": "^0.7.6"
   },
   "eslintConfig": {
     "extends": "@antfu"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "web3-core-requestmanager@1.8.1": "patches/web3-core-requestmanager@1.8.1.patch"
+    }
   }
 }

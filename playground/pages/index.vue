@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, useRuntimeConfig, useWeb3 } from '#imports'
 const $Web3 = useWeb3()
 const runtimeConfig = useRuntimeConfig()
 
