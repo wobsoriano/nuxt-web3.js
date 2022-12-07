@@ -15,11 +15,6 @@ export default defineNuxtModule({
     nuxt.options.build.transpile.push(runtimeDir)
     addPlugin(resolve(runtimeDir, 'plugin'))
 
-    nuxt.hook('vite:extendConfig', (config) => {
-      config.define = config.define || {}
-      config.define['process.env.NODE_DEBUG'] = JSON.stringify(process.env.NODE_DEBUG)
-    })
-
     addImports([
       { name: 'useWeb3', from: resolve(runtimeDir, 'composables') },
     ])
