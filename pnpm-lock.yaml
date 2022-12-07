@@ -10,8 +10,8 @@ specifiers:
   '@nuxt/kit': ^3.0.0
   '@nuxt/module-builder': ^0.2.1
   '@nuxt/schema': ^3.0.0
-  bumpp: ^7.1.1
-  eslint: ^8.14.0
+  bumpp: ^7.2.0
+  eslint: ^8.29.0
   nuxt: ^3.0.0
   pathe: ^1.0.0
   taze: ^0.7.6
