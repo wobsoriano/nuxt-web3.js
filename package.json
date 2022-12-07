@@ -36,8 +36,6 @@
     "prepare": "nuxi prepare playground"
   },
   "dependencies": {
-    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
-    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@nuxt/kit": "^3.0.0",
     "pathe": "^1.0.0",
     "web3": "^1.8.1",
